@@ -2,6 +2,7 @@ new fullpage('#fullpage', {
     //options here
     autoScrolling: false,
     scrollHorizontally: false,
+    setMouseWheelScrolling: false,
 
 });
 
@@ -158,3 +159,77 @@ const observer1 = new IntersectionObserver((entries, observer) => {
 }, { threshold: 0.5 });
 
 observer1.observe(chapter1);
+
+
+const chapter3 = document.getElementById('chapter3');
+
+const observer3 = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            anime({
+                targets: 'body',
+                backgroundColor: "#0000ff",
+                duration: 1000,
+                easing: 'easeInOutExpo',
+            });
+
+            anime({
+                targets: '.fractal-animation',
+                scale: [4, 1],
+                rotate: 180,
+
+            })
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+observer3.observe(chapter3);
+
+
+
+
+document.addEventListener("keydown", function (e) {
+    let isSpacebarPressed = false;
+    if (e.code == "Space") {
+        document.querySelectorAll(".press-spacebar").forEach((el) => {
+            anime({
+                targets: el,
+                opacity: 0,
+                duration: 100,
+            })
+            isSpacebarPressed = true;
+        });
+        anime({
+            targets: '.spacebar',
+            opacity: [.8, 0],
+            easing: "easeInOutSine",
+            duration: 1000,
+            delay: () => {
+                if (isSpacebarPressed) {
+                    return 0;
+                } else {
+                    return 500;
+                }
+            }
+        })
+        anime({
+            targets: '.fractal-animation-circle',
+            scale: [anime.random(1, 1.2)],
+            rotate: anime.random(-5, 5),
+            easing: "easeInOutSine",
+            duration: 1000,
+        })
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.innerWidth < 768) {
+        anime({
+            targets: ".sm-wrapper",
+            opacity: [0, 1],
+            duration: 1000,
+            easing: "easeInOutExpo"
+        })
+    }
+});

@@ -8,15 +8,24 @@ html {
 }
 
 body {
-  max-width: 1120px;
+  max-width: 1440px;
   background-color: #2003f5;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@media screen and (max-width: 768px) {
+  .lg-wrapper {
+    display: none;
+  }
+}
+
+.section {
+  padding: 3rem;
 }
 
 .container {
   position: relative;
   width: 100%;
-  padding: 4rem;
 }
 
 a {
@@ -29,6 +38,8 @@ h3,
 h4,
 h5,
 p {
+  word-break: keep-all;
+  word-wrap: break-word;
   color: white;
   mix-blend-mode: difference;
 }
@@ -65,6 +76,10 @@ h4 {
   font-size: 4rem;
 }
 
+h5 {
+  font-size: 3rem;
+}
+
 .fractal-animation {
   transform: scale(1);
   position: fixed;
@@ -97,6 +112,48 @@ img.fluid {
   position: absolute;
   font-size: 5rem;
   opacity: 0;
+}
+
+.sm-wrapper {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.sm-wrapper h2,
+.sm-wrapper h3 {
+  color: white;
+}
+@media screen and (min-width: 768px) {
+  .sm-wrapper {
+    display: none;
+  }
+}
+
+.spacebar {
+  background-color: white;
+  border-radius: 1rem;
+  position: fixed;
+  padding: 1rem 2rem;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  box-shadow: 0px 2.61052px 2.74791px 0px rgba(0, 0, 0, 0.02), 0px 6.6022px 6.94968px 0px rgba(0, 0, 0, 0.03), 0px 13.46786px 14.1767px 0px rgba(0, 0, 0, 0.04), 0px 27.74125px 29.20132px 0px rgba(0, 0, 0, 0.05), 0px 76px 80px 0px rgba(0, 0, 0, 0.07);
+}
+
+.press-spacebar {
+  background-color: white;
+  border-radius: 1rem;
+  position: fixed;
+  padding: 1rem 2rem;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  box-shadow: 0px 2.61052px 2.74791px 0px rgba(0, 0, 0, 0.02), 0px 6.6022px 6.94968px 0px rgba(0, 0, 0, 0.03), 0px 13.46786px 14.1767px 0px rgba(0, 0, 0, 0.04), 0px 27.74125px 29.20132px 0px rgba(0, 0, 0, 0.05), 0px 76px 80px 0px rgba(0, 0, 0, 0.07);
 }
 
 /*# sourceMappingURL=style.css.map */
