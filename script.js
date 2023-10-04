@@ -6,7 +6,7 @@ new fullpage('#fullpage', {
 });
 
 
-let DefaultValue = 700;
+let DefaultValue = 360;
 
 const getHue = (index) => {
     return index % 360;
@@ -23,24 +23,26 @@ const CreateAndAppendXAxis = (element, className, parent, delay, baseUnit) => {
         targets: Element,
         rotate: {
             value: delay * Math.PI,
-            easing: "easeOutCirc"
+            easing: "easeInOutExpo",
+            duration: delay * 30,
         },
-        opacity: [0, 1],
-        height: { value: [0, delay], duration: delay * 60, easing: "easeInSine" },
-        width: { value: 0.2, duration: delay * 30, easing: "easeInOutSine" },
+
+        height: { value: [0, delay], duration: delay * 50, easing: "easeInOutExpo" },
+        width: { value: delay, duration: delay * 50, easing: "easeInOutExpo" },
         translateX: {
-            value: `-=${Math.cos(delay) * baseUnit}`,
-            duration: delay * 3,
-            easing: "easeInCubic",
+            value: `-=${Math.cos(delay * 10) * baseUnit}`,
+            duration: delay * 30,
+            easing: "easeInOutExpo",
 
         },
         translateY: {
             value: `-=${Math.sin(delay) * baseUnit}`,
-            duration: delay * 10,
-            easing: "easeOutCubic",
+            duration: delay * 500,
+            easing: "easeInOutExpo",
         },
+        borderRadius: anime.random(0, 50),
         backgroundColor: () => {
-            return [`hsl(${delay}, 10%, 0%)`, `hsl(${getHue(delay)}, 100%, 60%)`];
+            return [`hsl(${delay}, 0%, 0%)`, `hsl(${getHue(delay)}, 100%, 60%)`];
         },
         delay: () => {
             return DefaultValue / (delay * baseUnit);
@@ -60,7 +62,7 @@ const DrawTimelineXAxis = () => {
             "fractal-animation-circle-element",
             Target[0],
             i,
-            i / 10
+            i * 10,
         );
     }
 };
@@ -71,12 +73,12 @@ DrawTimelineXAxis();
 const tada = document.getElementById('tada');
 
 // 하트 이모지 10개를 동적으로 생성
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 100; i++) {
     const heart = document.createElement('span');
     heart.className = 'heart';
     heart.textContent = '❤️';
     heart.style.top = `${Math.random() * 100}vh`;
-    heart.style.left = `${Math.random() * 10}vw`;
+    heart.style.left = `${Math.random(1, 2) * 10}vw`;
     tada.appendChild(heart);
 }
 
