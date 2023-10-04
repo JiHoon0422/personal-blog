@@ -115,6 +115,12 @@ const observer2 = new IntersectionObserver((entries, observer) => {
                 easing: 'easeInOutExpo',
             });
             anime({
+                targets: 'h1, h2, h3, h4,h5,p',
+                color: "#FFFFFF",
+                duration: 1000,
+                easing: 'easeInOutExpo',
+            });
+            anime({
                 targets: '.fractal-animation',
                 scale: [4, 1],
                 rotate: 90,
@@ -139,6 +145,7 @@ const observer1 = new IntersectionObserver((entries, observer) => {
                 duration: 1000,
                 easing: 'easeInOutExpo',
             });
+
             anime({
                 targets: '.fractal-animation',
                 scale: [4, 1],
