@@ -94,7 +94,7 @@ const observer = new IntersectionObserver((entries, observer) => {
                 opacity: [0, 1],
                 duration: 2000,
                 easing: 'easeInOutExpo',
-                delay: anime.stagger(100, { start: 500 }),
+                delay: anime.stagger(50, { start: 0 }),
             });
             observer.unobserve(entry.target);
         }
@@ -215,7 +215,7 @@ document.addEventListener("keydown", function (e) {
         })
         anime({
             targets: '.fractal-animation-circle',
-            scale: [anime.random(1, 1.2)],
+            scale: [anime.random(1, 2)],
             rotate: anime.random(-5, 5),
             easing: "easeInOutSine",
             duration: 1000,
