@@ -62,7 +62,7 @@ const DrawTimelineXAxis = () => {
             "fractal-animation-circle-element",
             Target[0],
             i,
-            i * 10,
+            i * 30,
         );
     }
 };
@@ -117,6 +117,7 @@ const observer2 = new IntersectionObserver((entries, observer) => {
             anime({
                 targets: '.fractal-animation',
                 scale: [4, 1],
+                rotate: 90,
 
             })
             observer.unobserve(entry.target);
@@ -125,3 +126,28 @@ const observer2 = new IntersectionObserver((entries, observer) => {
 }, { threshold: 0.5 });
 
 observer2.observe(chapter2);
+
+
+const chapter1 = document.getElementById('chapter1');
+
+const observer1 = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            anime({
+                targets: 'body',
+                backgroundColor: "#ffffff",
+                duration: 1000,
+                easing: 'easeInOutExpo',
+            });
+            anime({
+                targets: '.fractal-animation',
+                scale: [4, 1],
+                rotate: 180,
+
+            })
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+observer1.observe(chapter1);
