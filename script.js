@@ -28,11 +28,11 @@ const CreateAndAppendXAxis = (element, className, parent, delay, baseUnit) => {
             duration: delay * 30,
         },
 
-        height: { value: [0, delay], duration: delay * 50, easing: "easeInOutExpo" },
-        width: { value: delay, duration: delay * 50, easing: "easeInOutExpo" },
+        height: { value: anime.random(delay, delay/4), duration: delay * 50, easing: "easeInOutExpo" },
+        width: { value: anime.random(delay, delay/4), duration: delay * 50, easing: "easeInOutExpo" },
         translateX: {
             value: `-=${Math.cos(delay * 10) * baseUnit}`,
-            duration: delay * 30,
+            duration: delay * 50,
             easing: "easeInOutExpo",
 
         },
@@ -74,7 +74,7 @@ DrawTimelineXAxis();
 const tada = document.getElementById('tada');
 
 // 하트 이모지 10개를 동적으로 생성
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10; i++) {
     const heart = document.createElement('span');
     heart.className = 'heart';
     heart.textContent = '❤️';
@@ -175,7 +175,7 @@ const observer3 = new IntersectionObserver((entries, observer) => {
 
             anime({
                 targets: '.fractal-animation',
-                scale: [4, 1],
+                scale: 0.2,
                 rotate: 180,
 
             })
@@ -191,7 +191,7 @@ observer3.observe(chapter3);
 
 document.addEventListener("keydown", function (e) {
     let isSpacebarPressed = false;
-    if (e.code == "Space") {
+    if (e.code == "Space" || e.code == "ArrowDown" || e.code == "ArrowUp") {
         document.querySelectorAll(".press-spacebar").forEach((el) => {
             anime({
                 targets: el,
@@ -215,12 +215,13 @@ document.addEventListener("keydown", function (e) {
         })
         anime({
             targets: '.fractal-animation-circle',
-            scale: [anime.random(1, 2)],
-            rotate: anime.random(-5, 5),
+            scale: [anime.random(1, 4)],
+            rotate: anime.random(-100, 100),
             easing: "easeInOutSine",
             duration: 1000,
         })
     }
+    
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -232,4 +233,18 @@ document.addEventListener("DOMContentLoaded", function () {
             easing: "easeInOutExpo"
         })
     }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const chains = document.querySelectorAll(".chain");
+chains.forEach((e)=>{
+    anime({
+        targets: e,
+        rotate: 360,
+        loop: true,
+        direction: "alternate",
+        duration: 5000,
+        easing: "easeOutSine"
+    })
+})
 });
