@@ -7,15 +7,17 @@ new fullpage('#fullpage', {
 });
 
 
-let DefaultValue = 100;
+let DefaultValue = 200;
 
 const getHue = (index) => {
     return index % 360;
 };
 
+let loopTrigger = true;
+
 const CreateAndAppendXAxis = (element, className, parent, delay, baseUnit) => {
     const Element = document.createElement(element);
-
+    let index = 1;
     Element.classList.add(className);
     parent.appendChild(Element);
 
@@ -26,11 +28,7 @@ const CreateAndAppendXAxis = (element, className, parent, delay, baseUnit) => {
             easing: "easeInOutSine",
             duration: delay * 5000,
         },
-        opacity: {
-            value: [0, 1],
-            easing: "easeInOutExpo",
-            duration: delay * 100,
-        },
+
         height: { value: anime.random(delay, delay * 3), duration: delay * 50, easing: "easeInOutExpo" },
         width: { value: anime.random(delay, delay * 3), duration: delay * 50, easing: "easeInOutExpo" },
         translateX: {
@@ -49,9 +47,8 @@ const CreateAndAppendXAxis = (element, className, parent, delay, baseUnit) => {
             return [`hsl(${delay}, 0%, 100%)`, `hsl(${getHue(delay * 100)}, 100%, 60%)`];
         },
         delay: () => {
-            return delay;
+            return delay * anime.random(0, 50);
         },
-
         loop: true,
     });
 };
@@ -77,12 +74,12 @@ DrawTimelineXAxis();
 const tada = document.getElementById('tada');
 
 // 하트 이모지 10개를 동적으로 생성
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 50; i++) {
     const heart = document.createElement('span');
     heart.className = 'heart';
     heart.textContent = '❤️';
     heart.style.top = `${Math.random() * 100}vh`;
-    heart.style.left = `${Math.random(1, 2) * 10}vw`;
+    heart.style.left = `${Math.random(0.5, 0.1) * 100}px`;
     tada.appendChild(heart);
 }
 
@@ -194,6 +191,7 @@ observer3.observe(chapter3);
 
 document.addEventListener("keydown", function (e) {
     let isSpacebarPressed = false;
+    loopTrigger = false
     if (e.code == "Space" || e.code == "ArrowDown" || e.code == "ArrowUp") {
         document.querySelectorAll(".press-spacebar").forEach((el) => {
             anime({
