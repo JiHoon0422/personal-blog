@@ -7,14 +7,13 @@ new fullpage('#fullpage', {
 });
 
 
-let DefaultValue = 360;
+let DefaultValue = 100;
 
 const getHue = (index) => {
     return index % 360;
 };
 
 const CreateAndAppendXAxis = (element, className, parent, delay, baseUnit) => {
-    const BaseUnit = baseUnit;
     const Element = document.createElement(element);
 
     Element.classList.add(className);
@@ -23,32 +22,36 @@ const CreateAndAppendXAxis = (element, className, parent, delay, baseUnit) => {
     anime({
         targets: Element,
         rotate: {
-            value: delay * Math.PI,
-            easing: "easeInOutExpo",
-            duration: delay * 30,
+            value: delay * Math.PI * 10,
+            easing: "easeInOutSine",
+            duration: delay * 5000,
         },
-
-        height: { value: anime.random(delay, delay/4), duration: delay * 50, easing: "easeInOutExpo" },
-        width: { value: anime.random(delay, delay/4), duration: delay * 50, easing: "easeInOutExpo" },
-        translateX: {
-            value: `-=${Math.cos(delay * 10) * baseUnit}`,
-            duration: delay * 50,
+        opacity: {
+            value: [0, 1],
             easing: "easeInOutExpo",
+            duration: delay * 100,
+        },
+        height: { value: anime.random(delay, delay * 3), duration: delay * 50, easing: "easeInOutExpo" },
+        width: { value: anime.random(delay, delay * 3), duration: delay * 50, easing: "easeInOutExpo" },
+        translateX: {
+            value: `-=${Math.cos(delay) * baseUnit / 3}`,
+            duration: delay * 50,
+            easing: "easeInOutSine",
 
         },
         translateY: {
-            value: `-=${Math.sin(delay) * baseUnit}`,
-            duration: delay * 500,
+            value: `-=${Math.sin(delay) * baseUnit / 3}`,
+            duration: delay * 100,
             easing: "easeInOutExpo",
         },
-        borderRadius: anime.random(0, 50),
+        borderRadius: anime.random(0, 100),
         backgroundColor: () => {
-            return [`hsl(${delay}, 0%, 0%)`, `hsl(${getHue(delay)}, 100%, 60%)`];
+            return [`hsl(${delay}, 0%, 100%)`, `hsl(${getHue(delay * 100)}, 100%, 60%)`];
         },
         delay: () => {
-            return DefaultValue / (delay * baseUnit);
+            return delay;
         },
-        direction: "alternate",
+
         loop: true,
     });
 };
@@ -221,7 +224,7 @@ document.addEventListener("keydown", function (e) {
             duration: 1000,
         })
     }
-    
+
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -237,14 +240,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     const chains = document.querySelectorAll(".chain");
-chains.forEach((e)=>{
-    anime({
-        targets: e,
-        rotate: 360,
-        loop: true,
-        direction: "alternate",
-        duration: 5000,
-        easing: "easeOutSine"
+    chains.forEach((e) => {
+        anime({
+            targets: e,
+            rotate: 360,
+            loop: true,
+            direction: "alternate",
+            duration: 5000,
+            easing: "easeOutSine"
+        })
     })
-})
 });

@@ -54,6 +54,14 @@ p {
   }
 }
 
+h1.jumbotron {
+  font-size: 16rem;
+  font-weight: 900;
+  letter-spacing: -0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
 h1 {
   font-size: 15rem;
   font-weight: 900;
@@ -84,13 +92,13 @@ h5 {
   position: fixed;
   top: 50%;
   left: 50%;
+  transform: translate(-50% -50%);
 }
 .fractal-animation-circle-element {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50% -50%);
-  transform-origin: top right;
 }
 
 img.fluid {
