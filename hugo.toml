@@ -1,4 +1,6 @@
-baseURL = 'https://jihoon0422.github.io/personal-blog/'
+baseURL = '/'
 languageCode = 'ko-kr'
-title = 'Jihoon, a product designer and CSS geek'
-theme = "hugo-book"
+title = 'Jihoon, a product designer and css geek'
+
+
+ 

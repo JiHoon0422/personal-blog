@@ -1,0 +1,20 @@
+html{
+    font-size: 10px;
+}
+
+.container {
+    max-width: 1120px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.header{
+    &__title{
+        font-size: 5rem;
+        letter-spacing: -0.015em;
+            &--center{
+                @extend .header__title;
+                text-align: center;
+            }
+    }
+}

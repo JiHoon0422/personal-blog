@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jihoon, a product designer and css geek</title>
+    <link>/</link>
+    <description>Recent content on Jihoon, a product designer and css geek</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Fri, 16 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>통계, t-test에 대해 알아보자</title>
+      <link>/posts/t-test/</link>
+      <pubDate>Fri, 16 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/t-test/</guid>
+      <description>디자이너들이 논문을 적을 때 가장 어려워하는 부분이 통계이다. 귀무가설이란 무엇인지, 통계적으로 유의미함은 무엇인지, t-test는 무엇인지, Anova는 무엇인지 등등&amp;hellip; 어려운 내용들이 디자이너를 힘들게 한다. 하지만 조금만 알고 있으면 그렇게 어렵지 않다. 이 포스팅에서는 t-test의 유도 공식 같은 건 말하지 않는다. &amp;lsquo;어떤 경우에 어떻게 사용해야 하는지만 설명할 것이다.&amp;rsquo;
+t-test는 무엇인가? t-test란 두 집단 간의 평균의 차이가 유의미한 지 검증하는 가장 보편적인 통계 방법이다. 예를 들어보자, 문자메시지를 보낼 때 오타를 줄여주는 새로운 키보드 레이아웃 A를 만들었다.</description>
+    </item>
+    
+    <item>
+      <title>통계, 기본 개념을 정리해보자</title>
+      <link>/posts/statistics-basic/</link>
+      <pubDate>Fri, 16 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/statistics-basic/</guid>
+      <description>이 포스트에서는 유의수준과 p-value(유의확률)이 무엇인지, 그 전에 귀무가설과 대립가설, 1종오류와 2종오류가 무엇인지 등을 정리한다.
+귀무가설과 대립가설 귀무가설과 대립가설의 예를 들어보자. 내가 얻고자 하는 결론은 다음과 같다.
+20대 남자들의 키와 30대 남자들의 키가 다르다.
+이 결론을 얻기 위해서 20대 남자 30명과 30대 남자 30명을 대상으로 키를 측정했다. 자 여기서 기술 통계(descriptive statistics )와 추론 통계(inferential statistics)의 차이가 나온다. 우리가 표본으로 모은 총 60명(20대 30명, 30대 30명)의 키는 물론 다를 것이다. 이 경우에는 그냥 두 집단의 평균값을 계산해버리면 간단히 구할 수 있다.</description>
+    </item>
+    
+    <item>
+      <title>폰트 단위: em, rem(root em)</title>
+      <link>/font-scale/</link>
+      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/font-scale/</guid>
+      <description>폰트 단위: em, rem(root em) 시각디자인에서 타이포그래피는 매우 중요한 요소이다. 많은 구루 디자이너들이 자간, 행간, 글자 크기 등을 매우 세심하게 다룬다. 이는 디지털 환경에서도 마찬가지이다. 시각적 위계, 통일감 등을 위해 디자이너들은 타입 스케일을 만드는데 많은 시간을 할애한다.
+이번 포스팅에서는 타입 스케일을 만드는데 가장 기본이 되는 폰트의 단위, 그중에서도, em과 rem에 대해 이야기해보고자 한다.
+Mozlia MDN Docs에 따르면 em과 rem은 박스에서 텍스트 크기를 조정할 때 사용하는 상대 길이이다.
+em과 rem을 텍스트의 크기를 조정하기 위해서만 사용한다고 오해할 수 있는데 이는 잘못된 생각이다.</description>
+    </item>
+    
+    <item>
+      <title>폰트 단위: em, rem(root em)</title>
+      <link>/posts/font-scale/</link>
+      <pubDate>Thu, 15 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/font-scale/</guid>
+      <description>시각디자인에서 타이포그래피는 매우 중요한 요소이다. 많은 구루 디자이너들이 자간, 행간, 글자 크기 등을 매우 세심하게 다룬다. 이는 디지털 환경에서도 마찬가지이다. 시각적 위계, 통일감 등을 위해 디자이너들은 타입 스케일을 만드는데 많은 시간을 할애한다.
+이번 포스팅에서는 타입 스케일을 만드는데 가장 기본이 되는 폰트의 단위, 그중에서도, em과 rem에 대해 이야기해보고자 한다.
+Mozlia MDN Docs에 따르면 em과 rem은 박스에서 텍스트 크기를 조정할 때 사용하는 상대 길이이다.
+em과 rem을 텍스트의 크기를 조정하기 위해서만 사용한다고 오해할 수 있는데 이는 잘못된 생각이다.</description>
+    </item>
+    
+  </channel>
+</rss>
