@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "sass:watch": "sass --watch assets/scss/style.scss:static/style.css"
+    "sass:watch": "sass --watch assets/scss/style.scss:static/style.css",
+    "sass:build": "sass assets/scss:static/css"
   },
   "keywords": [],
   "author": "",
