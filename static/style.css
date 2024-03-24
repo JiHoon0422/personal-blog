@@ -9,8 +9,8 @@ html {
 }
 
 .header__title, .header__title--center {
-  font-size: 5rem;
-  letter-spacing: -0.015em;
+  font-size: 3rem;
+  letter-spacing: -0.025em;
 }
 .header__title--center {
   text-align: center;

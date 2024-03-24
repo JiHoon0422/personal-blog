@@ -9,6 +9,14 @@
 <body>
     <div class="container">
         {{- partial "header" . -}}
+        <ul>
+            {{ range .Site.RegularPages }}
+                <li>
+                    <a href="{{.RelPermalink}}" title={{.Title}}>
+                        <h3>{{.Title}} </h3>                        </a>
+                </li>
+            {{ end }}
+        </ul>
     </div>
 </body>
 </html>
