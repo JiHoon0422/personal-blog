@@ -18,5 +18,45 @@
             {{ end }}
         </ul>
     </div>
+
+    <script>
+   let angle;
+    let sliderAngle;
+    let sliderLength;
+
+    function setup() {
+      createCanvas(500, 500);
+      sliderAngle = createSlider(0, PI / 2, PI / 4, 0.01);
+      sliderLength = createSlider(0, 1, 0.67, 0.01);
+    }
+
+    function draw() {
+      background("#000000");
+      angle = sliderAngle.value();
+      let len = sliderLength.value();
+
+      translate(width / 3, height);
+      branch(100, len);
+    }
+
+    function branch(len, lenMultiplier) {
+      line(0, 0, 0, -len);
+      stroke(255)
+      translate(0, -len);
+
+      if (len > 20) {
+        push();
+        rotate(angle);
+        branch(len * lenMultiplier, lenMultiplier);
+        pop();
+
+        push();
+        rotate(-angle);
+        branch(len * lenMultiplier, lenMultiplier);
+        pop();
+      }
+    }
+             
+    </script>
 </body>
 </html>

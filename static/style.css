@@ -1,5 +1,11 @@
 html {
   font-size: 10px;
+  background-color: #020202;
+  color: white;
+}
+
+body {
+  background-color: inherit;
 }
 
 .container {
@@ -14,6 +20,10 @@ html {
 }
 .header__title--center {
   text-align: center;
+}
+
+a {
+  color: inherit;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,5 +1,13 @@
+$white: white;
+
 html{
     font-size: 10px;
+    background-color: #020202;
+    color: $white;
+}
+
+body{
+    background-color: inherit;
 }
 
 .container {
@@ -17,4 +25,8 @@ html{
                 text-align: center;
             }
     }
+}
+
+a{
+    color: inherit;
 }
