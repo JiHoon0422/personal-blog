@@ -1,62 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{- partial "head" -}}
     <title>{{.Site.Title}}</title>
-</head>
-<body>
+  </head>
+  <body>
+    <div id="canvas"></div>
+
     <div class="container">
-        {{- partial "header" . -}}
-        <ul>
+      <div>
+        <div>{{- partial "header" . -}}</div>
+        <div>
+          <ul>
             {{ range .Site.RegularPages }}
-                <li>
-                    <a href="{{.RelPermalink}}" title={{.Title}}>
-                        <h3>{{.Title}} </h3>                        </a>
-                </li>
+            <li>
+              <a href="{{.RelPermalink}}" title="{{.Title}}">
+                <h3>{{.Title}}</h3>
+              </a>
+            </li>
             {{ end }}
-        </ul>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <script>
-   let angle;
-    let sliderAngle;
-    let sliderLength;
+      let rectColors = ["#ff0000", "#0000ff", "#ffff00", "#000000", "#ffffff"];
+      let rects = [];
+      let swapInterval = 1500;
 
-    function setup() {
-      createCanvas(500, 500);
-      sliderAngle = createSlider(0, PI / 2, PI / 4, 0.01);
-      sliderLength = createSlider(0, 1, 0.67, 0.01);
-    }
+      function setup() {
+        let myCanvas = createCanvas(windowWidth / 2, windowHeight);
+        myCanvas.mouseClicked(swapRects);
+        myCanvas.position(windowWidth - windowWidth / 2, 0);
 
-    function draw() {
-      background("#000000");
-      angle = sliderAngle.value();
-      let len = sliderLength.value();
+        let scaleFactor = windowHeight / 400; // 400은 원래 캔버스 높이
 
-      translate(width / 3, height);
-      branch(100, len);
-    }
-
-    function branch(len, lenMultiplier) {
-      line(0, 0, 0, -len);
-      stroke(255)
-      translate(0, -len);
-
-      if (len > 20) {
-        push();
-        rotate(angle);
-        branch(len * lenMultiplier, lenMultiplier);
-        pop();
-
-        push();
-        rotate(-angle);
-        branch(len * lenMultiplier, lenMultiplier);
-        pop();
+        rects = [
+          {
+            x: 0,
+            y: 0,
+            w: 300 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#ff0000",
+          },
+          {
+            x: 300 * scaleFactor,
+            y: 0,
+            w: 100 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#ffff00",
+          },
+          {
+            x: 400 * scaleFactor,
+            y: 0,
+            w: 200 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#0000ff",
+          },
+          {
+            x: 0,
+            y: 200 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 100 * scaleFactor,
+            y: 200 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 300 * scaleFactor,
+            y: 200 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 100 * scaleFactor,
+            y: 300 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#000000",
+          },
+          {
+            x: 400 * scaleFactor,
+            y: 200 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#000000",
+          },
+          {
+            x: 500 * scaleFactor,
+            y: 200 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#000000",
+          },
+        ];
       }
-    }
-             
+
+      function draw() {
+        background(255);
+
+        // 사각형 그리기
+        for (let i = 0; i < rects.length; i++) {
+          let rectObj = rects[i];
+          fill(rectObj.color);
+          rect(rectObj.x, rectObj.y, rectObj.w, rectObj.h);
+          strokeWeight(50)
+        }
+
+
+      }
+
+      function swapRects() {
+        // 두 개의 무작위 사각형 선택
+        let i = floor(random(rects.length));
+        let j = floor(random(rects.length));
+        while (i === j) {
+          j = floor(random(rects.length));
+        }
+
+        // 선택된 사각형들의 위치 교환
+        let tempX = rects[i].x;
+        let tempY = rects[i].y;
+        rects[i].x = rects[j].x;
+        rects[i].y = rects[j].y;
+        rects[j].x = tempX;
+        rects[j].y = tempY;
+      }
+
+      function drawGrid() {
+        stroke(0);
+        strokeWeight(5);
+
+        // 세로선
+        line(300, 0, 300, 400);
+        line(400, 0, 400, 400);
+
+        // 가로선
+        line(0, 200, 600, 200);
+        line(100, 300, 300, 300);
+        line(400, 200, 400, 400);
+      }
+
+      // 일정 시간마다 위치 교환
+      setInterval(swapRects, swapInterval);
     </script>
-</body>
+  </body>
 </html>

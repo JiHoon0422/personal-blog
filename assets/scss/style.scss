@@ -14,6 +14,18 @@ body{
     max-width: 1120px;
     margin-left:auto;
     margin-right:auto;
+    position: fixed;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+
+    & > * {
+        padding: 72px;
+    }
+}
+
+.canvas-wrapper{
+    position :absolute;
+    right: 0;
 }
 
 .header{
@@ -22,7 +34,6 @@ body{
         letter-spacing: -0.025em;
             &--center{
                 @extend .header__title;
-                text-align: center;
             }
     }
 }
