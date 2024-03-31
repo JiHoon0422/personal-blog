@@ -1,7 +1,7 @@
 $white: white;
 
 html{
-    font-size: 10px;
+    
     background-color: #020202;
     color: $white;
 }
@@ -14,13 +14,21 @@ body{
     max-width: 1120px;
     margin-left:auto;
     margin-right:auto;
+   &-fixed{
     position: fixed;
     display: grid;
     grid-template-columns: repeat(2,1fr);
-
+   }
 
     & > * {
         padding: 72px;
+    }
+
+    img{
+        width: clamp(320px,100%,1120px);
+        margin-left: auto;
+        margin-right: auto;
+
     }
 }
 
@@ -31,7 +39,7 @@ body{
 
 .header{
     &__title{
-        font-size: 4rem;
+        font-size: 2rem;
         letter-spacing: -0.025em;
             &--center{
                 @extend .header__title;
@@ -41,7 +49,11 @@ body{
 
 a{
     color: inherit;
-    font-size: 24px;
+    font-size: inherit;
     margin-top:16px;
     display: inline-block;
+}
+
+p{
+    line-height: 1.9;
 }
