@@ -1,6 +1,6 @@
-
-{{$style := resources.Get "./style.css" }}
-{{ $t :=  time.Now }}
-<link rel="stylesheet" type="stylesheet" href="{{ relURL  $style  }}?ver='{{ $t.Unix }}'">
+{{ $opts := dict "transpiler" "libsass" "targetPath" "css/style.css" }}
+{{ with resources.Get "scss/style.scss" | toCSS $opts | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+{{ end }}
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js" integrity="sha512-eu9vkh+EbAsW3fMmPTj/DP5W3UegIdu0Z/OABMocvoofx43MYBkcQ9hRIVxZndV1vcCYQwBg+U1PkWl04TD0Jg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

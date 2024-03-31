@@ -16,9 +16,7 @@
           <ul>
             {{ range .Site.RegularPages }}
             <li>
-              <a href="{{.RelPermalink}}" title="{{.Title}}">
-                {{.Title}}
-              </a>
+              <a href="{{.RelPermalink}}" title="{{.Title}}"> {{.Title}} </a>
             </li>
             {{ end }}
           </ul>
@@ -27,7 +25,6 @@
     </div>
 
     <script>
-      
       let rectColors = ["#ff0000", "#0000ff", "#ffff00", "#000000", "#ffffff"];
       let rects = [];
       let draggedRect = null;
@@ -36,62 +33,320 @@
       function setup() {
         let myCanvas = createCanvas(windowWidth / 2, windowHeight);
         myCanvas.parent("canvas");
-        myCanvas.position(windowWidth/2,0)
+        myCanvas.position(windowWidth / 2, 0);
 
         let scaleFactor = windowHeight / 700;
         rects = [
-  { x: 0, y: 0, w: 50 * scaleFactor, h: 200 * scaleFactor, color: "#ff0000" },
-  { x: 200 * scaleFactor, y: 0, w: 150 * scaleFactor, h: 200 * scaleFactor, color: "#ffff00" },
-  { x: 300 * scaleFactor, y: 0, w: 200 * scaleFactor, h: 200 * scaleFactor, color: "#0000ff" },
-  { x: 0, y: 200 * scaleFactor, w: 150 * scaleFactor, h: 200 * scaleFactor, color: "#ffffff" },
-  { x: 100 * scaleFactor, y: 200 * scaleFactor, w: 100 * scaleFactor, h: 100 * scaleFactor, color: "#ffffff" },
-  { x: 300 * scaleFactor, y: 200 * scaleFactor, w: 200 * scaleFactor, h: 200 * scaleFactor, color: "#ffffff" },
-  { x: 100 * scaleFactor, y: 300 * scaleFactor, w: 150 * scaleFactor, h: 100 * scaleFactor, color: "#000000" },
-  { x: 400 * scaleFactor, y: 200 * scaleFactor, w: 100 * scaleFactor, h: 200 * scaleFactor, color: "#000000" },
-  { x: 500 * scaleFactor, y: 200 * scaleFactor, w: 100 * scaleFactor, h: 200 * scaleFactor, color: "#000000" },
-  
-  { x: 0, y: 400 * scaleFactor, w: 150 * scaleFactor, h: 100 * scaleFactor, color: "#ff0000" },
-  { x: 150 * scaleFactor, y: 400 * scaleFactor, w: 150 * scaleFactor, h: 100 * scaleFactor, color: "#0000ff" },
-  { x: 300 * scaleFactor, y: 400 * scaleFactor, w: 150 * scaleFactor, h: 100 * scaleFactor, color: "#ffff00" },
-  { x: 450 * scaleFactor, y: 400 * scaleFactor, w: 150 * scaleFactor, h: 100 * scaleFactor, color: "#ffffff" },
-  
-  { x: 0, y: 500 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#0000ff" },
-  { x: 120 * scaleFactor, y: 500 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#ffff00" },
-  { x: 240 * scaleFactor, y: 500 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#000000" },
-  { x: 360 * scaleFactor, y: 500 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#ff0000" },
-  { x: 480 * scaleFactor, y: 500 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#ffffff" },
-  
-  { x: 0, y: 600 * scaleFactor, w: 200 * scaleFactor, h: 150 * scaleFactor, color: "#ffff00" },
-  { x: 200 * scaleFactor, y: 600 * scaleFactor, w: 200 * scaleFactor, h: 150 * scaleFactor, color: "#ffffff" },
-  { x: 400 * scaleFactor, y: 600 * scaleFactor, w: 200 * scaleFactor, h: 150 * scaleFactor, color: "#0000ff" },
+          {
+            x: 0,
+            y: 0,
+            w: 50 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#ff0000",
+          },
+          {
+            x: 200 * scaleFactor,
+            y: 0,
+            w: 150 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#ffff00",
+          },
+          {
+            x: 300 * scaleFactor,
+            y: 0,
+            w: 200 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#0000ff",
+          },
+          {
+            x: 0,
+            y: 200 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 100 * scaleFactor,
+            y: 200 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 300 * scaleFactor,
+            y: 200 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 100 * scaleFactor,
+            y: 300 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#000000",
+          },
+          {
+            x: 400 * scaleFactor,
+            y: 200 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#000000",
+          },
+          {
+            x: 500 * scaleFactor,
+            y: 200 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 200 * scaleFactor,
+            color: "#000000",
+          },
 
-  { x: 0, y: 750 * scaleFactor, w: 100 * scaleFactor, h: 100 * scaleFactor, color: "#000000" },
-  { x: 100 * scaleFactor, y: 750 * scaleFactor, w: 100 * scaleFactor, h: 100 * scaleFactor, color: "#ff0000" },
-  { x: 200 * scaleFactor, y: 750 * scaleFactor, w: 100 * scaleFactor, h: 100 * scaleFactor, color: "#ffffff" },
-  { x: 300 * scaleFactor, y: 750 * scaleFactor, w: 100 * scaleFactor, h: 100 * scaleFactor, color: "#0000ff" },
-  { x: 400 * scaleFactor, y: 750 * scaleFactor, w: 100 * scaleFactor, h: 100 * scaleFactor, color: "#ffff00" },
-  { x: 500 * scaleFactor, y: 750 * scaleFactor, w: 100 * scaleFactor, h: 100 * scaleFactor, color: "#000000" },
-  
-  { x: 0, y: 850 * scaleFactor, w: 180 * scaleFactor, h: 120 * scaleFactor, color: "#ff0000" },
-  { x: 180 * scaleFactor, y: 850 * scaleFactor, w: 180 * scaleFactor, h: 120 * scaleFactor, color: "#ffffff" },
-  { x: 360 * scaleFactor, y: 850 * scaleFactor, w: 180 * scaleFactor, h: 120 * scaleFactor, color: "#0000ff" },
-  { x: 540 * scaleFactor, y: 850 * scaleFactor, w: 60 * scaleFactor, h: 120 * scaleFactor, color: "#000000" },
-  
-  { x: 0, y: 970 * scaleFactor, w: 150 * scaleFactor, h: 80 * scaleFactor, color: "#ffff00" },
-  { x: 150 * scaleFactor, y: 970 * scaleFactor, w: 150 * scaleFactor, h: 80 * scaleFactor, color: "#0000ff" },
-  { x: 300 * scaleFactor, y: 970 * scaleFactor, w: 150 * scaleFactor, h: 80 * scaleFactor, color: "#ffffff" },
-  { x: 450 * scaleFactor, y: 970 * scaleFactor, w: 150 * scaleFactor, h: 80 * scaleFactor, color: "#ff0000" },
-  
-  { x: 0, y: 1050 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#000000" },
-  { x: 120 * scaleFactor, y: 1050 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#ffffff" },
-  { x: 240 * scaleFactor, y: 1050 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#ff0000" },
-  { x: 360 * scaleFactor, y: 1050 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#0000ff" },
-  { x: 480 * scaleFactor, y: 1050 * scaleFactor, w: 120 * scaleFactor, h: 100 * scaleFactor, color: "#ffff00" },
-  
-  { x: 0, y: 1150 * scaleFactor, w: 200 * scaleFactor, h: 150 * scaleFactor, color: "#ffffff" },
-  { x: 200 * scaleFactor, y: 1150 * scaleFactor, w: 200 * scaleFactor, h: 150 * scaleFactor, color: "#000000" },
-  { x: 400 * scaleFactor, y: 1150 * scaleFactor, w: 200 * scaleFactor, h: 150 * scaleFactor, color: "#ff0000" }
-];
+          {
+            x: 0,
+            y: 400 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ff0000",
+          },
+          {
+            x: 150 * scaleFactor,
+            y: 400 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#0000ff",
+          },
+          {
+            x: 300 * scaleFactor,
+            y: 400 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffff00",
+          },
+          {
+            x: 450 * scaleFactor,
+            y: 400 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffffff",
+          },
+
+          {
+            x: 0,
+            y: 500 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#0000ff",
+          },
+          {
+            x: 120 * scaleFactor,
+            y: 500 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffff00",
+          },
+          {
+            x: 240 * scaleFactor,
+            y: 500 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#000000",
+          },
+          {
+            x: 360 * scaleFactor,
+            y: 500 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ff0000",
+          },
+          {
+            x: 480 * scaleFactor,
+            y: 500 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffffff",
+          },
+
+          {
+            x: 0,
+            y: 600 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 150 * scaleFactor,
+            color: "#ffff00",
+          },
+          {
+            x: 200 * scaleFactor,
+            y: 600 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 150 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 400 * scaleFactor,
+            y: 600 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 150 * scaleFactor,
+            color: "#0000ff",
+          },
+
+          {
+            x: 0,
+            y: 750 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#000000",
+          },
+          {
+            x: 100 * scaleFactor,
+            y: 750 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ff0000",
+          },
+          {
+            x: 200 * scaleFactor,
+            y: 750 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 300 * scaleFactor,
+            y: 750 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#0000ff",
+          },
+          {
+            x: 400 * scaleFactor,
+            y: 750 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffff00",
+          },
+          {
+            x: 500 * scaleFactor,
+            y: 750 * scaleFactor,
+            w: 100 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#000000",
+          },
+
+          {
+            x: 0,
+            y: 850 * scaleFactor,
+            w: 180 * scaleFactor,
+            h: 120 * scaleFactor,
+            color: "#ff0000",
+          },
+          {
+            x: 180 * scaleFactor,
+            y: 850 * scaleFactor,
+            w: 180 * scaleFactor,
+            h: 120 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 360 * scaleFactor,
+            y: 850 * scaleFactor,
+            w: 180 * scaleFactor,
+            h: 120 * scaleFactor,
+            color: "#0000ff",
+          },
+          {
+            x: 540 * scaleFactor,
+            y: 850 * scaleFactor,
+            w: 60 * scaleFactor,
+            h: 120 * scaleFactor,
+            color: "#000000",
+          },
+
+          {
+            x: 0,
+            y: 970 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 80 * scaleFactor,
+            color: "#ffff00",
+          },
+          {
+            x: 150 * scaleFactor,
+            y: 970 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 80 * scaleFactor,
+            color: "#0000ff",
+          },
+          {
+            x: 300 * scaleFactor,
+            y: 970 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 80 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 450 * scaleFactor,
+            y: 970 * scaleFactor,
+            w: 150 * scaleFactor,
+            h: 80 * scaleFactor,
+            color: "#ff0000",
+          },
+
+          {
+            x: 0,
+            y: 1050 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#000000",
+          },
+          {
+            x: 120 * scaleFactor,
+            y: 1050 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 240 * scaleFactor,
+            y: 1050 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ff0000",
+          },
+          {
+            x: 360 * scaleFactor,
+            y: 1050 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#0000ff",
+          },
+          {
+            x: 480 * scaleFactor,
+            y: 1050 * scaleFactor,
+            w: 120 * scaleFactor,
+            h: 100 * scaleFactor,
+            color: "#ffff00",
+          },
+
+          {
+            x: 0,
+            y: 1150 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 150 * scaleFactor,
+            color: "#ffffff",
+          },
+          {
+            x: 200 * scaleFactor,
+            y: 1150 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 150 * scaleFactor,
+            color: "#000000",
+          },
+          {
+            x: 400 * scaleFactor,
+            y: 1150 * scaleFactor,
+            w: 200 * scaleFactor,
+            h: 150 * scaleFactor,
+            color: "#ff0000",
+          },
+        ];
       }
 
       function draw() {
@@ -107,7 +362,10 @@
         if (draggedRect) {
           for (let i = 0; i < rects.length; i++) {
             let rectObj = rects[i];
-            if (rectObj !== draggedRect && isIntersecting(draggedRect, rectObj)) {
+            if (
+              rectObj !== draggedRect &&
+              isIntersecting(draggedRect, rectObj)
+            ) {
               let overlapRect = getOverlapRect(draggedRect, rectObj);
               fill(getRandomColor());
               rect(overlapRect.x, overlapRect.y, overlapRect.w, overlapRect.h);
@@ -189,15 +447,15 @@
           x: left,
           y: top,
           w: right - left,
-          h: bottom - top
+          h: bottom - top,
         };
 
         return overlapRect;
       }
 
       function getRandomColor() {
-        let letters = '0123456789ABCDEF';
-        let color = '#';
+        let letters = "0123456789ABCDEF";
+        let color = "#";
         for (let i = 0; i < 6; i++) {
           color += letters[Math.floor(Math.random() * 16)];
         }
