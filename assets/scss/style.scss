@@ -38,7 +38,7 @@ body {
 
 .header {
   &__title {
-    font-size: 2rem;
+    font-size: 1.4rem;
     letter-spacing: -0.025em;
     &--center {
       @extend .header__title;

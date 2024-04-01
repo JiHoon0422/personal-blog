@@ -3,94 +3,208 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
+
     {{- partial "head" -}}
     <title>{{.Site.Title}}</title>
   </head>
   <body style="overflow: hidden">
-    <div id="canvas" style="position: fixed; mix-blend-mode: lighten"></div>
-
-    <div class="container" style="position: relative; z-index: 100">
+    <div id="canvas" style="position: fixed"></div>
+    <div
+      class="container"
+      style="
+        background-color: yellow;
+        position: fixed;
+        z-index: 100;
+        height: 100%;
+        top: 0;
+        left: 0;
+        width: 40%;
+        color: black;
+        min-width: 400px;
+      "
+    >
       <div>
         <div>{{- partial "header" . -}}</div>
+        <div style="margin-top: 32px">
+          <b>Blog post</b>
+          {{ range .Site.RegularPages }}
+          <div>
+            <a href="{{.RelPermalink}}" title="{{.Title}}"> {{.Title}} </a>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+
+      <div>
+        <div><b>Portfoilo</b></div>
         <div>
-          <ul>
-            {{ range .Site.RegularPages }}
-            <li>
-              <a href="{{.RelPermalink}}" title="{{.Title}}"> {{.Title}} </a>
-            </li>
-            {{ end }}
-          </ul>
+          <a href="https://zuzu.network"
+            >ZUZU / Lead product designer (2019.11 ~ )</a
+          >
+        </div>
+        <div>
+          <a href="https://cfa.hongik.ac.kr">홍익대학교 미술대학 홈페이지</a>
+        </div>
+      </div>
+
+      <div>
+        <div><b>SNS</b></div>
+        <div>
+          <a href="https://www.linkedin.com/in/ljh62044217/">링크드인</a>
+        </div>
+      </div>
+
+      <div>
+        <div><b>Licenses & certifications</b></div>
+        <div>
+          <a href="https://bcert.me/bc/html/show-badge.html?b=oaqpirus">
+            Certificated Scrum Master
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div><b>Contact</b></div>
+        <div>
+          <p>ljh62044217@gmail.com</p>
         </div>
       </div>
     </div>
 
     <script>
-      let f = 0;
-      let value = 0;
-      let clicked = 0;
-      let x = 0;
-      let y = 0;
-      let scaleFactor = 1;
-      let hueOffset = 0; // 색상 오프셋 값
-
-      function Super_Tornado() {
-        ratio = frameCount * 0.01;
-        points = [];
-
-        for (let i = 0; i <= 360; i += 0.1) {
-          let theta = radians(i * ratio);
-          x = cos(theta) * i * sin(i);
-          y = (sin(log(theta)) * i) / tan(i);
-
-          let hue = map(i, 0, 360, hueOffset, hueOffset + 255); // 색상 오프셋 적용
-          let saturation = 255;
-          let brightness = 255;
-          colorMode(HSB, 255);
-          fill(hue, saturation, brightness);
-
-          let size = map(
-            dist(mouseX, mouseY, width / 2, height / 2),
-            0,
-            width / 2,
-            5,
-            1
-          ); // 마우스와의 거리에 따른 크기 조절
-          ellipse(x, y, size, size);
-          points.push({ x: x, y: y });
-        }
-      }
+      let colors = ["#FF0000", "#00FF00", "#0000FF", "#F00F00", "#00FFFF"];
+      let shapes = [];
+      let stars = [];
 
       function setup() {
-        let myCanvas = createCanvas(windowWidth, windowHeight);
-        myCanvas.position(0, 0);
-        myCanvas.parent("#canvas");
-        noStroke();
-        colorMode(HSB, 255);
+        createCanvas(windowWidth, windowHeight, WEBGL);
+        colorMode(RGB);
+
+        // 초기 도형 생성
+        for (let i = 0; i < 70; i++) {
+          let s = new Shape(
+            random(-width / 2, width / 2),
+            random(-height / 2, height / 2),
+            random(50, 150)
+          );
+          shapes.push(s);
+        }
+
+        // 별 생성
+        for (let i = 0; i < 50; i++) {
+          stars.push(new Star());
+        }
       }
 
       function draw() {
         background(0);
-        translate(width / 2, height / 2);
-        scale(scaleFactor);
-        ratio = frameCount * 0.01;
-        points = [];
-        Super_Tornado();
+
+        // 조명 설정
+        ambientLight(100, 100, 100);
+        directionalLight(0, 20, 255, 0, 4, 0);
+
+        pointLight(255, 255, 255, 0, 0, 50);
+
+        orbitControl();
+
+        // 도형 그리기
+        shapes.forEach((shape) => {
+          shape.update();
+          shape.display();
+        });
+
+        // 별 그리기
+        stars.forEach((star) => {
+          star.draw();
+        });
       }
 
-      function mouseWheel(event) {
-        if (event.delta < 0) {
-          scaleFactor *= 1.05;
-        } else {
-          scaleFactor /= 1.05;
+      class Shape {
+        constructor(x, y, r) {
+          this.pos = createVector(x * 3, y * 3, random(-r * 2, r * 2));
+          this.vel = p5.Vector.random3D();
+          this.vel.mult(random(1, 2));
+          this.r = r;
+          this.color = color(random(colors));
+          this.angle = random(TWO_PI);
+          this.rotateSpeed = random(-0.01, 0.01);
+          this.shapeType = floor(random(4));
+        }
+
+        update() {
+          this.pos.add(this.vel);
+
+          if (
+            this.pos.x < -width / 2 - this.r ||
+            this.pos.x > width / 2 + this.r
+          ) {
+            this.vel.x *= -1;
+          }
+          if (
+            this.pos.y < -height / 2 - this.r ||
+            this.pos.y > height / 2 + this.r
+          ) {
+            this.vel.y *= -1;
+          }
+          if (this.pos.z < -this.r || this.pos.z > this.r) {
+            this.vel.z *= -1;
+          }
+
+          this.angle += this.rotateSpeed;
+        }
+
+        display() {
+          push();
+          translate(this.pos.x, this.pos.y, this.pos.z);
+          rotateX(this.angle);
+          rotateY(this.angle * 0.7);
+          rotateZ(this.angle * 0.3);
+
+          noStroke();
+
+          // 도형 그리기
+          switch (this.shapeType) {
+            case 0:
+              ambientMaterial(this.color);
+              sphere(this.r);
+              break;
+            case 1:
+              specularMaterial(this.color);
+              box(this.r);
+              break;
+            case 2:
+              normalMaterial(this.color);
+              cone(this.r, this.r * 1.5);
+              break;
+            case 3:
+              ambientMaterial(this.color);
+              torus(this.r, this.r * 0.5);
+              break;
+          }
+
+          pop();
         }
       }
 
-      function mouseClicked() {
-        hueOffset = (hueOffset + 180) % 360; // 클릭할 때마다 색상 오프셋 값을 180도씩 변경
-      }
+      class Star {
+        constructor() {
+          this.pos = createVector(
+            random(-width, width),
+            random(-height, height),
+            random(-800, -400)
+          );
+          this.color = color(255, 255, 255);
+          this.size = random(1, 3);
+        }
 
-      function mouseMoved() {
-        scaleFactor = map(mouseY, 0, height, 0.5, 4); // 마우스 Y 좌표에 따라 스케일 조절
+        draw() {
+          push();
+          translate(this.pos.x, this.pos.y, this.pos.z);
+          ambientMaterial(this.color);
+          sphere(this.size);
+          pop();
+        }
       }
     </script>
   </body>
