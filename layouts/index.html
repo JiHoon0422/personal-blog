@@ -6,10 +6,10 @@
     {{- partial "head" -}}
     <title>{{.Site.Title}}</title>
   </head>
-  <body>
-    <div id="canvas"></div>
+  <body style="overflow: hidden">
+    <div id="canvas" style="position: fixed; mix-blend-mode: lighten"></div>
 
-    <div class="container-fixed">
+    <div class="container" style="position: relative; z-index: 100">
       <div>
         <div>{{- partial "header" . -}}</div>
         <div>
@@ -25,157 +25,72 @@
     </div>
 
     <script>
-      let rectColors = ["#ff0000", "#0000ff", "#ffff00", "#00ff00", "#ffffff"];
-      let rects = [];
-      let draggedRect = null;
-      let dragOffset = { x: 0, y: 0 };
+      let f = 0;
+      let value = 0;
+      let clicked = 0;
+      let x = 0;
+      let y = 0;
+      let scaleFactor = 1;
+      let hueOffset = 0; // 색상 오프셋 값
+
+      function Super_Tornado() {
+        ratio = frameCount * 0.01;
+        points = [];
+
+        for (let i = 0; i <= 360; i += 0.1) {
+          let theta = radians(i * ratio);
+          x = cos(theta) * i * sin(i);
+          y = (sin(log(theta)) * i) / tan(i);
+
+          let hue = map(i, 0, 360, hueOffset, hueOffset + 255); // 색상 오프셋 적용
+          let saturation = 255;
+          let brightness = 255;
+          colorMode(HSB, 255);
+          fill(hue, saturation, brightness);
+
+          let size = map(
+            dist(mouseX, mouseY, width / 2, height / 2),
+            0,
+            width / 2,
+            5,
+            1
+          ); // 마우스와의 거리에 따른 크기 조절
+          ellipse(x, y, size, size);
+          points.push({ x: x, y: y });
+        }
+      }
 
       function setup() {
         let myCanvas = createCanvas(windowWidth, windowHeight);
-        myCanvas.parent("canvas");
-        
-
-        let scaleFactor = windowHeight / 500;
-        let numRects = floor(random(10, 20));
-
-// 사각형 너비 계산
-let rectWidth = windowWidth / numRects;
-
-// 사각형 생성
-for (let i = 0; i < numRects; i++) {
-  let x = i * rectWidth;
-  let y = random(height / 2);
-  let w = rectWidth;
-  let h = random(50, 200);
-  let color = random(rectColors);
-  rects.push({ x, y, w, h, color });
-}
+        myCanvas.position(0, 0);
+        myCanvas.parent("#canvas");
+        noStroke();
+        colorMode(HSB, 255);
       }
 
       function draw() {
         background(0);
+        translate(width / 2, height / 2);
+        scale(scaleFactor);
+        ratio = frameCount * 0.01;
+        points = [];
+        Super_Tornado();
+      }
 
-        for (let i = 0; i < rects.length; i++) {
-          let rectObj = rects[i];
-          fill(rectObj.color);
-          rect(rectObj.x, rectObj.y, rectObj.w, rectObj.h);
-          strokeWeight(0);
-        }
-
-        if (draggedRect) {
-          for (let i = 0; i < rects.length; i++) {
-            let rectObj = rects[i];
-            if (
-              rectObj !== draggedRect &&
-              isIntersecting(draggedRect, rectObj)
-            ) {
-              let overlapRect = getOverlapRect(draggedRect, rectObj);
-              fill(getRandomColor());
-              rect(overlapRect.x, overlapRect.y, overlapRect.w, overlapRect.h);
-            }
-          }
+      function mouseWheel(event) {
+        if (event.delta < 0) {
+          scaleFactor *= 1.05;
+        } else {
+          scaleFactor /= 1.05;
         }
       }
 
-      function mousePressed() {
-        for (let i = rects.length - 1; i >= 0; i--) {
-          let rectObj = rects[i];
-          if (
-            mouseX >= rectObj.x &&
-            mouseX <= rectObj.x + rectObj.w &&
-            mouseY >= rectObj.y &&
-            mouseY <= rectObj.y + rectObj.h
-          ) {
-            draggedRect = rectObj;
-            dragOffset.x = mouseX - rectObj.x;
-            dragOffset.y = mouseY - rectObj.y;
-            break;
-          }
-        }
+      function mouseClicked() {
+        hueOffset = (hueOffset + 180) % 360; // 클릭할 때마다 색상 오프셋 값을 180도씩 변경
       }
 
-      function mouseDragged() {
-        if (draggedRect) {
-          draggedRect.x = mouseX - dragOffset.x;
-          draggedRect.y = mouseY - dragOffset.y;
-        }
-      }
-
-      function mouseReleased() {
-        if (draggedRect) {
-          // 스프링 효과와 함께 위치 변경
-          let startX = draggedRect.x;
-          let startY = draggedRect.y;
-          let endX = mouseX - dragOffset.x;
-          let endY = mouseY - dragOffset.y;
-          let startTime = millis();
-          let duration = 500;
-
-          function animate() {
-            let elapsed = millis() - startTime;
-            let t = elapsed / duration;
-            t = t * t * (3 - 2 * t); // 이징 함수 적용 (ease-in-out)
-
-            if (elapsed < duration) {
-              draggedRect.x = lerp(startX, endX, t);
-              draggedRect.y = lerp(startY, endY, t);
-              requestAnimationFrame(animate);
-            } else {
-              draggedRect.x = endX;
-              draggedRect.y = endY;
-            }
-          }
-
-          animate();
-        }
-        draggedRect = null;
-      }
-
-      function isIntersecting(rect1, rect2) {
-        return (
-          rect1.x < rect2.x + rect2.w &&
-          rect1.x + rect1.w > rect2.x &&
-          rect1.y < rect2.y + rect2.h &&
-          rect1.y + rect1.h > rect2.y
-        );
-      }
-
-      function getOverlapRect(rect1, rect2) {
-        let left = Math.max(rect1.x, rect2.x);
-        let right = Math.min(rect1.x + rect1.w, rect2.x + rect2.w);
-        let top = Math.max(rect1.y, rect2.y);
-        let bottom = Math.min(rect1.y + rect1.h, rect2.y + rect2.h);
-
-        let overlapRect = {
-          x: left,
-          y: top,
-          w: right - left,
-          h: bottom - top,
-        };
-
-        return overlapRect;
-      }
-
-      function getRandomColor() {
-        let letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
-
-      function windowResized() {
-        resizeCanvas(windowWidth / 2, windowHeight);
-
-        let scaleFactor = windowHeight / 400;
-
-        for (let i = 0; i < rects.length; i++) {
-          rects[i].x *= scaleFactor;
-          rects[i].y *= scaleFactor;
-          rects[i].w *= scaleFactor;
-          rects[i].h *= scaleFactor;
-        }
+      function mouseMoved() {
+        scaleFactor = map(mouseY, 0, height, 0.5, 4); // 마우스 Y 좌표에 따라 스케일 조절
       }
     </script>
   </body>

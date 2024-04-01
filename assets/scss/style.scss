@@ -1,64 +1,58 @@
 $white: white;
 
-html{
-    
-    background-color: #020202;
-    color: $white;
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+html {
+  background-color: #000;
+  color: $white;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI",
+    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    sans-serif;
 }
 
-body{
-    background-color: inherit;
+body {
+  background-color: inherit;
 }
 
 .container {
-    max-width: 1120px;
-    margin-left:auto;
-    margin-right:auto;
-   &-fixed{
-    @extend .container;
-    position: fixed;
-    z-index: 100;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    mix-blend-mode: difference;
-   }
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
 
-    & > * {
-        padding: 72px;
+  & > * {
+    padding: 24px;
+  }
+
+  img {
+    width: clamp(320px, 100%, 1120px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.canvas-wrapper {
+  position: absolute;
+  right: 0;
+}
+
+.header {
+  &__title {
+    font-size: 2rem;
+    letter-spacing: -0.025em;
+    &--center {
+      @extend .header__title;
     }
-
-    img{
-        width: clamp(320px,100%,1120px);
-        margin-left: auto;
-        margin-right: auto;
-
-    }
+  }
 }
 
-.canvas-wrapper{
-    position :absolute;
-    right: 0;
+a {
+  color: inherit;
+  font-size: inherit;
+  margin-top: 16px;
+  display: inline-block;
 }
 
-.header{
-    &__title{
-        font-size: 2rem;
-        letter-spacing: -0.025em;
-        text-align: center;
-            &--center{
-                @extend .header__title;
-            }
-    }
-}
-
-a{
-    color: inherit;
-    font-size: inherit;
-    margin-top:16px;
-    display: inline-block;
-}
-
-p{
-    line-height: 1.9;
+p {
+  line-height: 1.9;
 }
