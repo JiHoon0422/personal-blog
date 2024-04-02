@@ -35,52 +35,98 @@
         width: 40%;
         color: black;
         min-width: 400px;
+        overflow-y: auto;
       "
     >
       <div>
         <div>{{- partial "header" . -}}</div>
+        <a
+          href="https://www.linkedin.com/in/ljh62044217"
+          style="margin-top: 10px"
+        >
+          <img
+            width="24"
+            height="24"
+            style="width: 24px; vertical-align: middle"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/2048px-LinkedIn_icon.svg.png"
+            alt="링크드인 로고"
+          />
+        </a>
         <div style="margin-top: 32px">
           <b>Blog post</b>
-          {{ range .Site.RegularPages }}
-          <div>
-            <a href="{{.RelPermalink}}" title="{{.Title}}"> {{.Title}} </a>
-          </div>
-          {{ end }}
+          <ul>
+            {{ range .Site.RegularPages }}
+            <li>
+              <a href="{{.RelPermalink}}" title="{{.Title}}"> {{.Title}} </a>
+            </li>
+            {{ end }}
+          </ul>
         </div>
       </div>
 
       <div>
         <div><b>Portfoilo</b></div>
-        <div>
-          <a href="https://zuzu.network"
-            >ZUZU / Lead product designer (2019.11 ~ )</a
-          >
-        </div>
-        <div>
-          <a href="https://cfa.hongik.ac.kr">홍익대학교 미술대학 홈페이지</a>
-        </div>
+        <ul>
+          <li>
+            <a href="https://zuzu.network"
+              >ZUZU / Lead product designer (2019.11 ~ )</a
+            >
+          </li>
+          <li>
+            <a href="https://cfa.hongik.ac.kr">홍익대학교 미술대학 홈페이지</a>
+          </li>
+        </ul>
       </div>
 
       <div>
-        <div><b>SNS</b></div>
+        <b>Experience</b>
+        <ul>
+          <li>Seoul National University | Researcher 1yr 4month</li>
+          <li>Hongik University | Undergraduate Research Assistant</li>
+          <li>Fastcampus: Prototyping with Framer | lecturer</li>
+        </ul>
+      </div>
+
+      <div>
         <div>
-          <a href="https://www.linkedin.com/in/ljh62044217/">링크드인</a>
+          <b>Paper</b>
+          <ul>
+            <li>
+              Jang, S., & Lee, J. (2019) User Experience Research on Intimacy
+              and Usability when an AI Voice- Activated Personal Assistant Uses
+              a Dialect. Archives of Design Research, 32(4), 72-82 [SCOPUS] ,
+              co-author | Korean Society of Design Science
+            </li>
+            <li>
+              Password Retrieval Research with an Input Window Spaced by a
+              Character Type | HCI Korea
+            </li>
+            <li>
+              When Multiple Users Meet Multiple Profiles: An Exploratory Study
+              of Multiple Users on Netflix | HCI Korea
+            </li>
+          </ul>
         </div>
       </div>
 
       <div>
         <div><b>Licenses & certifications</b></div>
-        <div>
-          <a href="https://bcert.me/bc/html/show-badge.html?b=oaqpirus">
-            Certificated Scrum Master
-          </a>
-        </div>
+
+        <ul>
+          <li>
+            <a href="https://bcert.me/bc/html/show-badge.html?b=oaqpirus">
+              Certificated Scrum Master
+            </a>
+          </li>
+        </ul>
       </div>
 
       <div>
         <div><b>Contact</b></div>
         <div>
-          <p>ljh62044217@gmail.com</p>
+          <ul>
+            <li>ljh62044217@gmail.com</li>
+          </ul>
         </div>
       </div>
     </div>

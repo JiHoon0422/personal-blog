@@ -56,3 +56,16 @@ a {
 p {
   line-height: 1.9;
 }
+
+ul {
+  padding-left: 20px;
+  li {
+    line-height: 1.8;
+    a {
+      margin-top: 0;
+    }
+  }
+  li + li {
+    margin-top: 12px;
+  }
+}
