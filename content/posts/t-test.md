@@ -36,12 +36,11 @@ R-studio에서는 아주 간단한 코드로 수집된 데이터가 정규 분�
 
 
 
-![R 코드 예시](https://t1.daumcdn.net/thumb/R1280x0.fpng/?fname=http://t1.daumcdn.net/brunch/service/user/38LO/image/9fLwERCQp5dTedflAVu7J8qCmfA.png)
+![R 코드 예시](https://res.cloudinary.com/dho0uj15e/image/upload/w_640/f_auto/v1712473782/R1280x0.fpng_o6rlzd.png)
 
 
 
 sample은 랜덤 한 숫자를 만들어 내는 함수로 1:15는 1에서 15까지, 뒤에 10은 10개의 숫자를 만들어내는 것을 의미한다. 그리고 이를 df라는 변수에 저장한다. 뒤에 df라고 한 번 더 입력을 한 것은 확인용이다. qqnorm과 qqline을 입력하면 오른쪽의 그래프가 만들어진다. 선 위에 점이 밀집되어 있을수록 정규분포를 따르는 것이다. 그런데 이렇게 되면 시각적으로 정규분포를 얼마나 따르는지 해석할 수밖에 없다. 즉 정확히 정규분포를 따르는지 알 수가 없다. 이를 해결하기 위해 나온 함수가 shapiro.test()이다.
-
 
 
 
