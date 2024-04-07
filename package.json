@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "sass:watch": "sass --watch assets/scss/style.scss:assets/style.css",
-    "sass:build": "sass assets/scss/style.scss:assets/style.css"
+    "sass:build": "sass assets/scss/style.scss:assets/style.css",
+    "server": "hugo server -D"
   },
   "keywords": [],
   "author": "",
