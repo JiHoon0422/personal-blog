@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,61 +8,22 @@
     <title>{{.Site.Title}}</title>
   </head>
   <body style="overflow: hidden">
-    <div
-      style="
-        position: absolute;
-        z-index: 101;
-        top: 0;
-        right: 0;
-        min-width: 320px;
-        background-color: black;
-        width: 20%;
-        min-width: 400px;
-        padding: 48px 24px;
-        mix-blend-mode: hard-light;
-        box-shadow: 0px 0px 0px 1px rgb(255, 255, 255);
-      "
-    >
+    <div class="blog-post">
       <b>Blog post</b>
       <ul>
-        {{ range .Site.RegularPages }}
+        {{ range .Site.RegularPages }} {{if eq .Type "blog"}}
         <li>
           <a href="{{.RelPermalink}}" title="{{.Title}}"> {{.Title}} </a>
         </li>
-        {{ end }}
+        {{end}} {{ end }}
       </ul>
     </div>
     <div id="canvas" style="position: fixed"></div>
     <img
-      src="https://res.cloudinary.com/dho0uj15e/image/upload/v1712472616/photo-1699102544164-97344f8ac4e3_fc3qfb.jpg"
-      style="
-        position: fixed;
-        right: 0;
-        width: 100vw;
-        object-fit: cover;
-        bottom: 0;
-        z-index: 100;
-        mix-blend-mode: color-dodge;
-        user-select: none;
-        pointer-events: none;
-      "
+      class="background-image"
+      src="https://res.cloudinary.com/jihoon/image/upload/v1712472616/photo-1699102544164-97344f8ac4e3_fc3qfb.jpg"
     />
-    <div
-      class="container"
-      style="
-        box-shadow: 0px 0px 0px 1px rgb(255, 255, 255);
-        background-color: black;
-        position: fixed;
-        z-index: 100;
-        height: 100%;
-        top: 0;
-        left: 0;
-        width: 30%;
-        color: white;
-        min-width: 480px;
-        overflow-y: auto;
-      "
-    >
+    <div class="summary">
       <div>
         <div>{{- partial "header" . -}}</div>
         <a
@@ -72,9 +33,9 @@
           <img
             width="24"
             height="24"
-            style="width: 24px; vertical-align: middle"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/2048px-LinkedIn_icon.svg.png"
             alt="링크드인 로고"
+            style="margin-bottom: 16px"
           />
         </a>
       </div>
@@ -83,13 +44,16 @@
         <div><b>Portfoilo & Experience</b></div>
         <ul>
           <li>
-            <a href="https://zuzu.network">ZUZU</a>
+            <a href="{{.Site.BaseURL}}ㄹ/posts/portfolio/zuzu/">ZUZU</a>
           </li>
           <li>
             <a href="https://cfa.hongik.ac.kr">홍익대학교 미술대학 홈페이지</a>
           </li>
           <hr style="opacity: 0.48" />
-          <li>ZUZU(Kodebox) | Lead product designer | 2019. 11 ~</li>
+          <li>
+            <a href="https://zuzu.network">ZUZU(Kodebox)</a> | Lead product
+            designer | 2019. 11 ~
+          </li>
           <li>Seoul National University | Researcher | 1yr 4month</li>
           <li>Hongik University | Undergraduate Research Assistant</li>
           <li>Fastcampus: Prototyping with Framer | lecturer | 3month</li>
@@ -155,7 +119,7 @@
           let s = new Shape(
             random(-width / 2, width / 2),
             random(-height / 2, height / 2),
-            random(50, 150)
+            random(50, 150),
           );
           shapes.push(s);
         }
@@ -259,7 +223,7 @@
           this.pos = createVector(
             random(-width, width),
             random(-height, height),
-            random(-800, -400)
+            random(-800, -400),
           );
           this.color = color(255, 255, 255);
           this.size = random(1, 3);

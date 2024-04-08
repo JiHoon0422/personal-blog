@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   {{- partial "head.html" . -}}
   <body>
     <div class="post">
-    {{- partial "header-for-post.html" . -}}
+      {{- partial "header-for-post.html" . -}}
       <div id="content" class="container">{{- block "main" . }}{{- end }}</div>
     </div>
-    {{- partial "footer.html" . -}}
+    {{- partial "footer.html" . -}} {{/*
+    <script src="{{.Site.BaseURL}}/js/dist/main.js"></script>
+    */}}
   </body>
 </html>
