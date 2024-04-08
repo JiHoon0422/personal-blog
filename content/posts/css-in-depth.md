@@ -49,7 +49,7 @@ CSS는 디자이너를 위한 언어라고 생각하고 있습니다. 처음에 
 ## 9. floating 레이아웃과 clear fix 핵
 - clear fix핵을 써야 했던 정확한 이유
 
-## 10. posistion과 left의 브라우저 렌더링 속도 
+## 10. position과 left의 브라우저 렌더링 속도 
 left 대신에 transform을 써야 하는 이유
 
 ## 11. 같은 클래스를 붙여서 여러 번 쓰는 이유
