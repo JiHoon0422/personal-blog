@@ -9,16 +9,38 @@
     <title>{{.Site.Title}}</title>
   </head>
   <body style="overflow: hidden">
+    <div
+      style="
+        position: absolute;
+        z-index: 101;
+        top: 0;
+        right: 0;
+        min-width: 320px;
+        background-color: black;
+        width: 20%;
+        min-width: 400px;
+        padding: 48px 24px;
+        mix-blend-mode: hard-light;
+      "
+    >
+      <b>Blog post</b>
+      <ul>
+        {{ range .Site.RegularPages }}
+        <li>
+          <a href="{{.RelPermalink}}" title="{{.Title}}"> {{.Title}} </a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
     <div id="canvas" style="position: fixed"></div>
     <img
       src="https://res.cloudinary.com/dho0uj15e/image/upload/v1712472616/photo-1699102544164-97344f8ac4e3_fc3qfb.jpg"
-      
       style="
         position: fixed;
         right: 0;
         width: 100vw;
         object-fit: cover;
-        
+
         bottom: 0;
         z-index: 100;
         mix-blend-mode: color-dodge;
@@ -37,7 +59,7 @@
         left: 0;
         width: 30%;
         color: black;
-        min-width: 400px;
+        min-width: 480px;
         overflow-y: auto;
       "
     >
@@ -55,16 +77,6 @@
             alt="링크드인 로고"
           />
         </a>
-        <div style="margin-top: 32px">
-          <b>Blog post</b>
-          <ul>
-            {{ range .Site.RegularPages }}
-            <li>
-              <a href="{{.RelPermalink}}" title="{{.Title}}"> {{.Title}} </a>
-            </li>
-            {{ end }}
-          </ul>
-        </div>
       </div>
 
       <div>
@@ -132,11 +144,12 @@
       let colors = ["#FF0000", "#00FF00", "#0000FF", "#F00F00", "#00FFFF"];
       let shapes = [];
       let stars = [];
+      let cameraRotationX = 0;
+      let cameraRotationY = 0;
 
       function setup() {
         createCanvas(windowWidth, windowHeight, WEBGL);
         colorMode(RGB);
-
         // 초기 도형 생성
         for (let i = 0; i < 70; i++) {
           let s = new Shape(
@@ -146,30 +159,33 @@
           );
           shapes.push(s);
         }
-
         // 별 생성
         for (let i = 0; i < 50; i++) {
           stars.push(new Star());
         }
       }
 
+      function mouseWheel(event) {
+        let delta = event.delta;
+        cameraRotationX += delta * 0.01;
+        cameraRotationY += delta * 0.01;
+      }
+
       function draw() {
         background(0);
-
         // 조명 설정
         ambientLight(100, 100, 100);
         directionalLight(0, 20, 255, 0, 4, 0);
-
         pointLight(255, 255, 255, 0, 0, 50);
-
-        orbitControl();
-
+        // orbitControl();
+        // 카메라 회전 적용
+        rotateX(cameraRotationX);
+        rotateY(cameraRotationY);
         // 도형 그리기
         shapes.forEach((shape) => {
           shape.update();
           shape.display();
         });
-
         // 별 그리기
         stars.forEach((star) => {
           star.draw();
@@ -190,7 +206,6 @@
 
         update() {
           this.pos.add(this.vel);
-
           if (
             this.pos.x < -width / 2 - this.r ||
             this.pos.x > width / 2 + this.r
@@ -206,7 +221,6 @@
           if (this.pos.z < -this.r || this.pos.z > this.r) {
             this.vel.z *= -1;
           }
-
           this.angle += this.rotateSpeed;
         }
 
@@ -216,9 +230,7 @@
           rotateX(this.angle);
           rotateY(this.angle * 0.7);
           rotateZ(this.angle * 0.3);
-
           noStroke();
-
           // 도형 그리기
           switch (this.shapeType) {
             case 0:
@@ -238,7 +250,6 @@
               torus(this.r, this.r * 0.5);
               break;
           }
-
           pop();
         }
       }

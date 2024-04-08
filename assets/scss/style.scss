@@ -94,6 +94,13 @@ ul {
     padding-left: 12px;
   }
 
+  p,
+  li,
+  caption {
+    font-weight: 300;
+    line-height: 1.9;
+  }
+
   pre:has(code) {
     background-color: #494949;
     border-radius: 0.5em;
