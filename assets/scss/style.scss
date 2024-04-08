@@ -40,9 +40,10 @@ body {
 }
 
 .header {
-  background-color: yellow;
+  background-color: inherit;
   text-align: center;
-  $dark: #222;
+
+  color: white;
   max-height: 70px;
   display: flex;
   align-items: center;
@@ -51,7 +52,6 @@ body {
     background-color: transparent;
   }
 
-  color: $dark;
   &_title {
     margin-top: 0;
     font-size: 1.4rem;

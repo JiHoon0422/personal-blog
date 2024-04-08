@@ -32,12 +32,12 @@ body {
 }
 
 .header {
-  background-color: yellow;
+  background-color: inherit;
   text-align: center;
+  color: white;
   max-height: 70px;
   display: flex;
   align-items: center;
-  color: #222;
 }
 .header__for-post {
   background-color: transparent;
