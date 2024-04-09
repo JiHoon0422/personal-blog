@@ -150,4 +150,9 @@ ul {
   min-width: 480px;
   overflow-y: auto;
   padding-left: 24px; 
+  & > * {
+    &:not(:first-child):not(:nth-child(2)){
+      margin-top: 12px;
+    }
+  }
 }
